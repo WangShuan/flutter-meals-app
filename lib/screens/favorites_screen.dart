@@ -26,7 +26,7 @@ class FavoritesScreen extends StatelessWidget {
               itemCount: favoriteMeals.length,
             )
           : Text(
-              'You have no favorites yet. \n Start adding some meal!',
+              '尚未收藏任何料理',
               style: Theme.of(context).textTheme.titleLarge,
             ),
     );

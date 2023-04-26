@@ -30,13 +30,13 @@ class MealsItem extends StatelessWidget {
   String get complexityText {
     switch (complexity) {
       case Complexity.simple:
-        return 'Eazy';
+        return '簡單';
         break;
       case Complexity.challenging:
-        return 'Normal';
+        return '普通';
         break;
       case Complexity.hard:
-        return 'Hard';
+        return '困難';
         break;
       default:
         return 'Unknown';
@@ -73,16 +73,19 @@ class MealsItem extends StatelessWidget {
           children: [
             Stack(
               children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),
-                  ), // Image border
-                  child: Image(
-                    image: NetworkImage(imgUrl),
-                    height: 240,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+                Hero(
+                  tag: id,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),
+                    ), // Image border
+                    child: Image(
+                      image: NetworkImage(imgUrl),
+                      height: 240,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Positioned(
@@ -118,7 +121,10 @@ class MealsItem extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.timer_outlined),
+                      const Icon(
+                        Icons.timer_outlined,
+                        size: 20,
+                      ),
                       const SizedBox(
                         height: 6,
                       ),
@@ -130,28 +136,29 @@ class MealsItem extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      const Icon(Icons.sentiment_satisfied_alt_outlined),
+                      const Text(
+                        '難易度:',
+                      ),
                       const SizedBox(
                         height: 6,
                       ),
                       Text(
                         ' $complexityText',
-                        style: Theme.of(context).textTheme.titleSmall,
                       )
                     ],
                   ),
-                  Row(
-                    children: [
-                      const Icon(Icons.monetization_on_outlined),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      Text(
-                        ' $affordabilityText',
-                        style: Theme.of(context).textTheme.titleSmall,
-                      )
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     const Icon(Icons.monetization_on_outlined),
+                  //     const SizedBox(
+                  //       height: 6,
+                  //     ),
+                  //     Text(
+                  //       ' $affordabilityText',
+                  //       style: Theme.of(context).textTheme.titleSmall,
+                  //     )
+                  //   ],
+                  // ),
                 ],
               ),
             )

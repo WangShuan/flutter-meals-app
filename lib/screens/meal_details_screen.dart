@@ -7,8 +7,7 @@ class MealDetailsScreen extends StatelessWidget {
   final Function isFavMeal;
 
   // const MealDetailsScreen({Key key, this.toggleFavMeal}) : super(key: key);
-  const MealDetailsScreen(this.toggleFavMeal, this.isFavMeal, {Key key})
-      : super(key: key);
+  const MealDetailsScreen(this.toggleFavMeal, this.isFavMeal, {Key key}) : super(key: key);
 
   Widget buildSubtitle(BuildContext context, String text) {
     return Container(
@@ -26,8 +25,7 @@ class MealDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final routerArgs =
-        ModalRoute.of(context).settings.arguments as Map<String, String>;
+    final routerArgs = ModalRoute.of(context).settings.arguments as Map<String, String>;
     final String mealTitle = routerArgs['name'];
     final String mealId = routerArgs['id'];
     final meal = dummyMeals.firstWhere(
@@ -35,41 +33,54 @@ class MealDetailsScreen extends StatelessWidget {
     );
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: FittedBox(
             child: Text(mealTitle),
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              toggleFavMeal(mealId);
+            },
+            icon: isFavMeal(mealId)
+                ? const Icon(Icons.star_rounded)
+                : const Icon(Icons.star_border_rounded),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
             child: Column(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Image(
-                    image: NetworkImage(meal.imgUrl),
-                    height: 240,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+                Hero(
+                  tag: mealId,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image(
+                      image: NetworkImage(meal.imgUrl),
+                      height: 240,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 buildSubtitle(context, '準備材料:'),
                 buildMainContainer(meal.ingredients.map((e) {
                   return Card(
-                    color: Theme.of(context).primaryColorLight,
-                    // width: 240,
+                    color: Theme.of(context).primaryColorDark,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                        vertical: 2,
-                        horizontal: 10,
+                        vertical: 4,
+                        horizontal: 12,
                       ),
                       child: Text(
-                        '- $e',
+                        e,
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: Theme.of(context).textTheme.bodyMedium.copyWith(color: Colors.white),
                       ),
                     ),
                   );
@@ -97,8 +108,7 @@ class MealDetailsScreen extends StatelessWidget {
                                 child: Text(
                                   '#${index + 1}',
                                   style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
+                                      color: Colors.white, fontWeight: FontWeight.bold),
                                 ),
                               ),
                               const SizedBox(
@@ -113,9 +123,7 @@ class MealDetailsScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          index < meal.steps.length - 1
-                              ? const Divider()
-                              : const SizedBox()
+                          index < meal.steps.length - 1 ? const Divider() : const SizedBox()
                         ],
                       );
                     }).toList(),
@@ -123,14 +131,6 @@ class MealDetailsScreen extends StatelessWidget {
                 ),
               ],
             )),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          toggleFavMeal(mealId);
-        },
-        child: isFavMeal(mealId)
-            ? const Icon(Icons.favorite)
-            : const Icon(Icons.favorite_border),
       ),
     );
   }

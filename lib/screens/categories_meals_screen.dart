@@ -20,8 +20,7 @@ class _CategoriesMealsScreenState extends State<CategoriesMealsScreen> {
   @override
   void didChangeDependencies() {
     if (!isInited) {
-      final routerArgs =
-          ModalRoute.of(context).settings.arguments as Map<String, String>;
+      final routerArgs = ModalRoute.of(context).settings.arguments as Map<String, String>;
       cateTitle = routerArgs['title'];
       final String cateId = routerArgs['id'];
       displayedMeals = widget.availabelMeals
@@ -38,7 +37,10 @@ class _CategoriesMealsScreenState extends State<CategoriesMealsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(cateTitle),
+        title: FittedBox(
+          child: Text(cateTitle),
+        ),
+        centerTitle: true,
       ),
       body: ListView.builder(
         itemBuilder: (ctx, index) {

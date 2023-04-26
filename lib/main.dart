@@ -4,8 +4,8 @@ import './models/meal.dart';
 import './screens/filters_screen.dart';
 import './screens/meal_details_screen.dart';
 import './screens/categories_meals_screen.dart';
-import './screens/tabs_screen-toptab.dart';
-// import './screens/tabs_screen-bottomtab.dart';
+import 'screens/tabs_top_screen.dart';
+// import 'screens/tabs_bottom_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,8 +50,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _toggleFavMeal(String mealId) {
-    final existingIndex =
-        _favoriteMeals.indexWhere((meal) => meal.id == mealId);
+    final existingIndex = _favoriteMeals.indexWhere((meal) => meal.id == mealId);
     if (existingIndex >= 0) {
       setState(() {
         _favoriteMeals.removeAt(existingIndex);
@@ -86,7 +85,6 @@ class _MyAppState extends State<MyApp> {
                 color: Color.fromARGB(255, 50, 50, 30),
               ),
               bodyMedium: const TextStyle(
-                color: Color.fromARGB(255, 33, 33, 33),
                 fontSize: 16,
                 height: 1.5,
               ),
@@ -102,20 +100,17 @@ class _MyAppState extends State<MyApp> {
               ),
               displaySmall: const TextStyle(
                 fontSize: 28,
-                color: Color.fromARGB(255, 68, 70, 50),
+                color: Color.fromARGB(255, 15, 33, 8),
               ),
             ),
-        canvasColor: const Color.fromRGBO(255, 254, 229, 1),
-        primarySwatch: Colors.yellow,
+        canvasColor: const Color.fromARGB(255, 236, 255, 229),
+        primarySwatch: Colors.lightGreen,
       ),
       home: TabsScreen(_favoriteMeals),
       routes: {
-        CategoriesMealsScreen.routerName: (context) =>
-            CategoriesMealsScreen(_availabelMeals),
-        MealDetailsScreen.routerName: (context) =>
-            MealDetailsScreen(_toggleFavMeal, _isFavMeal),
-        FiltersScreen.routerName: (context) =>
-            FiltersScreen(_setFilters, _filters),
+        CategoriesMealsScreen.routerName: (context) => CategoriesMealsScreen(_availabelMeals),
+        MealDetailsScreen.routerName: (context) => MealDetailsScreen(_toggleFavMeal, _isFavMeal),
+        FiltersScreen.routerName: (context) => FiltersScreen(_setFilters, _filters),
       },
     );
   }

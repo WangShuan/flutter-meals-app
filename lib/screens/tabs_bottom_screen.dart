@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/meal.dart';
 import './favorites_screen.dart';
 import './categories_screen.dart';
-import '../widgets/main_drawer.dart';
+// import '../widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   final List<Meal> favoriteMeals;
@@ -26,8 +26,8 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   void didChangeDependencies() {
     _pages = [
-      {'page': const CategoriesScreen(), 'title': 'Meals Categories'},
-      {'page': FavoritesScreen(widget.favoriteMeals), 'title': 'My Favorites'}
+      {'page': const CategoriesScreen(), 'title': '食譜分類'},
+      {'page': FavoritesScreen(widget.favoriteMeals), 'title': '我的收藏'}
     ];
     super.didChangeDependencies();
   }
@@ -37,25 +37,26 @@ class _TabsScreenState extends State<TabsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_pages[_selectPageIndex]['title']),
+        centerTitle: true,
       ),
-      drawer: const MainDrawer(),
+      // drawer: const MainDrawer(),
       body: _pages[_selectPageIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
-        selectedItemColor: Colors.brown[800],
-        unselectedItemColor: Colors.brown[200],
+        selectedItemColor: Colors.black87,
+        unselectedItemColor: Colors.black26,
         currentIndex: _selectPageIndex,
         type: BottomNavigationBarType.shifting,
         items: [
           BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,
             icon: const Icon(Icons.category_rounded),
-            label: "Categories",
+            label: "食譜分類",
           ),
           BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,
-            icon: const Icon(Icons.star_rate_rounded),
-            label: "Favorites",
+            icon: const Icon(Icons.star_rounded),
+            label: "我的收藏",
           ),
         ],
       ),

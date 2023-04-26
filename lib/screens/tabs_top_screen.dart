@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/meal.dart';
-import '../widgets/main_drawer.dart';
+// import '../widgets/main_drawer.dart';
 import './favorites_screen.dart';
 import './categories_screen.dart';
 
@@ -16,6 +16,7 @@ class TabsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Meals'),
+          centerTitle: true,
           bottom: const TabBar(
             // 建立 TabBar 小部件
             tabs: [
@@ -25,13 +26,13 @@ class TabsScreen extends StatelessWidget {
                 text: 'Ctaegories', // 設置標題文字
               ),
               Tab(
-                icon: Icon(Icons.star_rate_rounded),
+                icon: Icon(Icons.star_rounded),
                 text: 'Favorites',
               )
             ],
           ),
         ),
-        drawer: const MainDrawer(), // 設置漢堡選單開啟的抽屜小部件(展開區域)
+        // drawer: const MainDrawer(), // 設置漢堡選單開啟的抽屜小部件(展開區域)
         body: TabBarView(
           // 建立 tab 欄點擊後顯示的畫面
           children: [
